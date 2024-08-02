@@ -76,11 +76,18 @@ table span{
 .table1{
     margin-top: 10px;
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    
+}
 
 input{
     border: none;
     width: 60px;
     background-color:  rgb(254, 218, 175);
+    border: none;
 }
 .foot{
     display: flex;
@@ -88,5 +95,4 @@ input{
     align-items: center;
     margin: 80px 0px 10px;
 }
-
 
