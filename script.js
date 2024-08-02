@@ -1,74 +1,92 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const theoryInputs = document.querySelectorAll('.theory');
-    const practicalInputs = document.querySelectorAll('.practical');
-    const totalSpans = document.querySelectorAll('.total');
-    const wordsSpans = document.querySelectorAll('.words');
-    const overallTotalSpan = document.getElementById('overalltotal');
-    const overallTotalWordSpan = document.getElementById('overalltotalword');
-    const resultSpan = document.getElementById('result');
-    const percentageSpan = document.getElementById('percentage');
-    const gradeSpan = document.getElementById('grade');
+header ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.container-fluid{
+    background-color: antiquewhite;
+    width: 70%;
+    height: 80%;
+}
 
-    function calculateTotals() {
-        let grandTotal = 0;
-        let totalMaxMarks = 0;
-        let passed = true;
+header img{
+    height: 140px;
+    width: 100px;
+}
+header ul{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.qr{
+    height: 100px;
+    width: 100px;
+}
+span{
+    color: red;
+}
+h1{
+    color: red;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+h2,h3{
+    text-align: center;
+    color: rgb(26, 0, 155);
+    font-family: 'Times New Roman', Times, serif;
+}
+.row{
+    text-align: center;
+    border: 1px solid rgb(14, 0, 66);
+}
+h5{
+    color:  rgb(14, 0, 66);
+}
+img{
+    border-radius: 6px;
+}
+body{
+    margin: 200px 50px;
+}
+.container-fluid{
+    padding: 40px;
+    border: 2px solid  rgb(14, 0, 66);
+}
+table{
+    width: 100%;
+    border: 2px solid  rgb(14, 0, 66);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(254, 218, 175);
+}
+td{
+    border: 2px solid  rgb(14, 0, 66);;
+    padding: 20px;
+    color: brown;
+}
+th{
+    border: 2px solid  rgb(14, 0, 66);
+    padding: 20px;
+    border-left:0cap;
+}
+table span{
+    width: 100%;
+}
+.table1{
+    margin-top: 10px;
+}
 
-        theoryInputs.forEach((input, index) => {
-            const theoryValue = parseFloat(input.value) || 0;
-            const totalValue = theoryValue;
+input{
+    border: none;
+    width: 60px;
+    background-color:  rgb(254, 218, 175);
+}
+.foot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 80px 0px 10px;
+}
 
-            totalSpans[index].textContent = totalValue;
-            wordsSpans[index].textContent = numberToWords(totalValue);
 
-            grandTotal += totalValue;
-            totalMaxMarks += 100;
-            if (theoryValue < 50) {
-                passed = false;
-            }
-        });
-        const percentage = (grandTotal / totalMaxMarks) * 100;
-        const grade = calculateGrade(percentage);
-
-        overallTotalSpan.textContent = grandTotal;
-        overallTotalWordSpan.textContent = numberToWords(grandTotal);
-        percentageSpan.textContent = percentage.toFixed(2) + '%';
-        gradeSpan.textContent = grade;
-        resultSpan.textContent = passed ? 'PASS' : 'FAIL';
-    }
-
-    function numberToWords(num) {
-        const a = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
-        const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
-
-        if (num === 0) return 'Zero';
-
-        if (num < 20) return a[num];
-
-        let numString = num.toString();
-        if (numString.length === 2) {
-            return b[parseInt(numString[0])] + (a[parseInt(numString[1])] === '' ? '' : ' ' + a[parseInt(numString[1])]);
-        }
-
-        if (numString.length === 3) {
-            return a[parseInt(numString[0])] + ' hundred' + (parseInt(numString[1] + numString[2]) === 0 ? '' : ' and ' + numberToWords(parseInt(numString[1] + numString[2])));
-        }
-
-        return '';
-    }
-
-    function calculateGrade(percentage) {
-        if (percentage >= 90) return 'A+';
-        if (percentage >= 80) return 'A';
-        if (percentage >= 70) return 'B+';
-        if (percentage >= 60) return 'B';
-        if (percentage >= 50) return 'C+';
-        if (percentage >= 40) return 'C';
-        return 'F';
-    }
-
-    theoryInputs.forEach(input => input.addEventListener('input', calculateTotals));
-    practicalInputs.forEach(input => input.addEventListener('input', calculateTotals));
-
-    calculateTotals();
-});
